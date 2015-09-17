@@ -9,8 +9,8 @@ git clone https://github.com/paul-barry-kenzan/gulp-selenium-example.git
 ```
 Install packages
 ```bash
-    $ npm install
-    ```
+$ npm install
+```
 
 Run the simple command to kick things off.
 ```bash
