@@ -8,30 +8,30 @@ try {
   wd = require(__dirname + '/../node_modules/gulp-mocha-selenium/node_modules/wd/lib/main');
 }
 
-describe('mocha spec examples', function() {
+describe('Example Specs', function() {
+  var browser;
+
   this.timeout(10000);
 
-  // regular mocha usage is also an option
-  describe('regular mocha usage', function() {
-    var browser;
+  before(function(done) {
+    browser = wd.promiseChainRemote();
 
-    before(function(done) {
-      browser = wd.promiseChainRemote();
+    browser
+      .init({browserName:'chrome'})
+      .nodeify(done);
+  });
 
-      browser
-        .init({browserName:'chrome'})
-        .nodeify(done);  //same as : .then(function() { done(); });
-    });
+  after(function(done) {
+    browser
+      .quit()
+      .nodeify(done);
+  });
+
+  describe('Launch www.google.com', function() {
 
     beforeEach(function(done) {
       browser
         .get('http://www.google.com')
-        .nodeify(done);
-    });
-
-    after(function(done) {
-      browser
-        .quit()
         .nodeify(done);
     });
 
@@ -43,6 +43,7 @@ describe('mocha spec examples', function() {
         })
         .nodeify(done);
     });
+
   });
 
 });
